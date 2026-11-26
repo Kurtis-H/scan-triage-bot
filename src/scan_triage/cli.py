@@ -8,7 +8,7 @@ import os
 import sys
 
 from scan_triage import __version__, explain, suppress
-from scan_triage.models import Severity
+from scan_triage.models import Finding, Severity
 from scan_triage.parsers import ParseError, load_report
 from scan_triage.report import Triage, to_json, to_markdown
 from scan_triage.triage import deduplicate, rank
@@ -78,7 +78,9 @@ def main(argv: list[str] | None = None) -> int:
     raw_count = len(raw)
     findings = rank(deduplicate(raw))
 
-    suppressed, expired, unused = [], [], []
+    suppressed: list[Finding] = []
+    expired: list[suppress.Suppression] = []
+    unused: list[suppress.Suppression] = []
     if args.suppressions:
         try:
             rules = suppress.load(args.suppressions)

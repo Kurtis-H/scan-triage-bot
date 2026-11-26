@@ -52,8 +52,8 @@ def load_report(path: str) -> tuple[list[Finding], int]:
     fmt = detect_format(data)
     findings, dropped = {"sarif": parse_sarif, "zap": parse_zap, "trivy": parse_trivy}[fmt](data)
     source = os.path.basename(path)
-    for f in findings:
-        f.sources.add(source)
+    for finding in findings:
+        finding.sources.add(source)
     return findings, dropped
 
 
@@ -180,6 +180,8 @@ def _sarif_severity(result: dict, rule: dict) -> Severity:
     # GitHub's convention: a CVSS-style score in rule.properties["security-severity"].
     raw = (rule.get("properties") or {}).get("security-severity")
     try:
+        if raw is None:
+            raise ValueError("no security-severity")
         score = float(raw)
     except (TypeError, ValueError):
         level = result.get("level") or (rule.get("defaultConfiguration") or {}).get("level")

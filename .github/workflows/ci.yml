@@ -18,7 +18,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev]"
       - run: ruff check . && ruff format --check .
-      - run: pytest
+      - name: Type check (mypy)
+        run: mypy --ignore-missing-imports src
+      - name: Tests with coverage (fails under 80%)
+        run: pytest -q --cov=scan_triage --cov-report=term-missing --cov-fail-under=80
+      - name: Dependency vulnerability audit
+        run: pip-audit --skip-editable
 
   # Dogfooding: run the Action on the sample reports so the README demo stays real.
   demo:

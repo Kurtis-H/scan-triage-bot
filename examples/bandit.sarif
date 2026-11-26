@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Bandit",
+          "rules": [
+            {
+              "id": "B608",
+              "shortDescription": {
+                "text": "Possible SQL injection via string-based query construction"
+              },
+              "help": {
+                "text": "Use parameterized queries."
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "CWE-89"
+                ]
+              }
+            },
+            {
+              "id": "B101",
+              "shortDescription": {
+                "text": "Use of assert detected"
+              },
+              "help": {
+                "text": "Asserts are removed when Python runs with -O; don't use them for runtime checks."
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "CWE-703"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "B608",
+          "level": "warning",
+          "message": {
+            "text": "Possible SQL injection vector through string-based query construction."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app/main.py"
+                },
+                "region": {
+                  "startLine": 80
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "B101",
+          "level": "note",
+          "message": {
+            "text": "Use of assert detected."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_vulns.py"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "B101",
+          "level": "note",
+          "message": {
+            "text": "Use of assert detected."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_baseline.py"
+                },
+                "region": {
+                  "startLine": 14
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

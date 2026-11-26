@@ -1,0 +1,73 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": ".",
+  "ArtifactType": "filesystem",
+  "Results": [
+    {
+      "Target": "requirements.txt",
+      "Class": "lang-pkgs",
+      "Type": "pip",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2099-0001",
+          "PkgName": "examplelib",
+          "InstalledVersion": "1.0.0",
+          "FixedVersion": "1.0.5",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-444"
+          ],
+          "Title": "examplelib: HTTP request smuggling (illustrative sample)",
+          "Description": "Sample advisory for demo purposes. A request smuggling flaw lets an attacker bypass front-end access controls."
+        },
+        {
+          "VulnerabilityID": "CVE-2099-0003",
+          "PkgName": "otherlib",
+          "InstalledVersion": "3.2.0",
+          "FixedVersion": "",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "Title": "otherlib: denial of service via crafted input (illustrative sample)",
+          "Description": "Sample advisory for demo purposes. No fixed version has been released yet."
+        }
+      ]
+    },
+    {
+      "Target": "requirements-dev.txt",
+      "Class": "lang-pkgs",
+      "Type": "pip",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2099-0002",
+          "PkgName": "exampletestlib",
+          "InstalledVersion": "2.1.0",
+          "FixedVersion": "2.2.0",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "Title": "exampletestlib: path traversal in report writer (illustrative sample)",
+          "Description": "Sample advisory for demo purposes. Only affects the test toolchain."
+        }
+      ]
+    },
+    {
+      "Target": "Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "Misconfigurations": [
+        {
+          "ID": "DS026",
+          "AVDID": "AVD-DS-0026",
+          "Title": "No HEALTHCHECK defined",
+          "Severity": "LOW",
+          "Status": "FAIL",
+          "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+          "Resolution": "Add HEALTHCHECK instruction in Dockerfile"
+        }
+      ]
+    }
+  ]
+}

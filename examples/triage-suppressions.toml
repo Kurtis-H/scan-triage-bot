@@ -1,0 +1,22 @@
+# Reviewed, time-limited decisions. Every entry needs a reason and an expiry date.
+
+[[suppress]]
+rule = "zap:10055"
+reason = "Inline styles on the index page until CSS moves to a static file (vuln-shop#12)"
+expires = 2027-06-30
+
+[[suppress]]
+rule = "zap:10109"
+reason = "Informational only: ZAP noting the app uses JavaScript"
+expires = 2027-12-31
+
+[[suppress]]
+rule = "bandit:B101"
+path = "tests/*"
+reason = "Asserts are how pytest works"
+expires = 2026-10-01   # expired on purpose to show what happens
+
+[[suppress]]
+rule = "trivy:CVE-2099-9999"
+reason = "Package was removed in October"
+expires = 2027-01-31   # matches nothing any more, so the report flags it as unused

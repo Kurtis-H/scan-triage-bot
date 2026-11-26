@@ -1,0 +1,159 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.16.0",
+  "site": [
+    {
+      "@name": "http://localhost:8000",
+      "@host": "localhost",
+      "@port": "8000",
+      "@ssl": "false",
+      "alerts": [
+        {
+          "pluginid": "10038",
+          "alertRef": "10038",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "3",
+          "cweid": "693",
+          "wascid": "15",
+          "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.</p>",
+          "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+          "count": "4",
+          "instances": [
+            {
+              "uri": "http://localhost:8000/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8000/products/1",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8000/products/2",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8000/products/3",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "2",
+          "cweid": "693",
+          "wascid": "15",
+          "desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'.</p>",
+          "solution": "<p>Ensure that the application/web server sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p>",
+          "count": "2",
+          "instances": [
+            {
+              "uri": "http://localhost:8000/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8000/static/app.js",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020",
+          "alert": "Missing Anti-clickjacking Header",
+          "name": "Missing Anti-clickjacking Header",
+          "riskcode": "2",
+          "confidence": "2",
+          "cweid": "1021",
+          "wascid": "15",
+          "desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
+          "solution": "<p>Add a frame-ancestors directive to the Content-Security-Policy header, or set X-Frame-Options to DENY.</p>",
+          "count": "2",
+          "instances": [
+            {
+              "uri": "http://localhost:8000/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8000/products/1",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10109",
+          "alertRef": "10109",
+          "alert": "Modern Web Application",
+          "name": "Modern Web Application",
+          "riskcode": "0",
+          "confidence": "2",
+          "cweid": "-1",
+          "wascid": "15",
+          "desc": "<p>The application appears to be a modern web application.</p>",
+          "solution": "<p>This is an informational alert and so no changes are required.</p>",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://localhost:8000/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure - Unix",
+          "riskcode": "0",
+          "confidence": "0",
+          "cweid": "497",
+          "wascid": "15",
+          "desc": "<p>A timestamp was disclosed by the application/web server.</p>",
+          "solution": "<p>Manually confirm that the timestamp data is not sensitive.</p>",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://localhost:8000/static/app.js",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

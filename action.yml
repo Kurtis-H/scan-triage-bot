@@ -1,0 +1,53 @@
+name: scan-triage-bot
+description: Merge ZAP, Trivy and SARIF security reports into one deduplicated, ranked summary.
+branding:
+  icon: shield
+  color: blue
+
+inputs:
+  reports:
+    description: Report files, globs or directories (space-separated)
+    required: true
+  suppressions:
+    description: Path to a TOML suppressions file (optional)
+    default: ""
+  fail-on:
+    description: Fail if any unsuppressed finding is at or above this severity (critical/high/medium/low/info), or empty for report-only
+    default: ""
+  top:
+    description: Findings shown in detail
+    default: "10"
+
+outputs:
+  report:
+    description: Path to the markdown report
+    value: scan-triage.md
+  json:
+    description: Path to the JSON report
+    value: scan-triage.json
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install scan-triage-bot
+      shell: bash
+      run: pip install --quiet "${{ github.action_path }}"
+    - name: Triage
+      shell: bash
+      env:
+        REPORTS: ${{ inputs.reports }}
+        SUPPRESSIONS: ${{ inputs.suppressions }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        TOP: ${{ inputs.top }}
+      run: |
+        args=(--top "$TOP" -o scan-triage.md --json-output scan-triage.json)
+        [ -n "$SUPPRESSIONS" ] && args+=(--suppressions "$SUPPRESSIONS")
+        [ -n "$FAIL_ON" ] && args+=(--fail-on "$FAIL_ON")
+        # shellcheck disable=SC2086  # REPORTS is intentionally word-split into globs
+        status=0
+        scan-triage $REPORTS "${args[@]}" || status=$?
+        [ -f scan-triage.md ] && cat scan-triage.md >> "$GITHUB_STEP_SUMMARY"
+        exit $status

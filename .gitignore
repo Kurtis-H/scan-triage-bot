@@ -1,0 +1,9 @@
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+scan-triage.md
+scan-triage.json
+build/
+dist/

@@ -1,0 +1,94 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.16.0",
+  "site": [
+    {
+      "@name": "http://localhost:8001",
+      "@host": "localhost",
+      "@port": "8001",
+      "@ssl": "false",
+      "alerts": [
+        {
+          "pluginid": "10055",
+          "alertRef": "10055",
+          "alert": "CSP: style-src unsafe-inline",
+          "name": "CSP: style-src unsafe-inline",
+          "riskcode": "2",
+          "confidence": "3",
+          "cweid": "693",
+          "wascid": "15",
+          "desc": "<p>The Content Security Policy allows 'unsafe-inline' in style-src, which weakens protection against injected styles.</p>",
+          "solution": "<p>Move inline styles into a static stylesheet and remove 'unsafe-inline' from style-src.</p>",
+          "count": "2",
+          "instances": [
+            {
+              "uri": "http://localhost:8001/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8001/products/1",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020",
+          "alert": "Missing Anti-clickjacking Header",
+          "name": "Missing Anti-clickjacking Header",
+          "riskcode": "2",
+          "confidence": "2",
+          "cweid": "1021",
+          "wascid": "15",
+          "desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
+          "solution": "<p>Add a frame-ancestors directive to the Content-Security-Policy header, or set X-Frame-Options to DENY.</p>",
+          "count": "2",
+          "instances": [
+            {
+              "uri": "http://localhost:8001/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            },
+            {
+              "uri": "http://localhost:8001/products/2",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pluginid": "10109",
+          "alertRef": "10109",
+          "alert": "Modern Web Application",
+          "name": "Modern Web Application",
+          "riskcode": "0",
+          "confidence": "2",
+          "cweid": "-1",
+          "wascid": "15",
+          "desc": "<p>The application appears to be a modern web application.</p>",
+          "solution": "<p>This is an informational alert and so no changes are required.</p>",
+          "count": "1",
+          "instances": [
+            {
+              "uri": "http://localhost:8001/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

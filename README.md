@@ -90,14 +90,14 @@ scan-triage reports/ --format json -o triage.json
 
 ```yaml
 - name: Triage security scans
-  uses: Kurtis-H/scan-triage-bot@v0
+  uses: Kurtis-H/scan-triage-bot@c91c263c9c944587db1b254873b7b11fe8e695a3 # main
   with:
     reports: reports/zap.json reports/trivy.json reports/semgrep.sarif
     suppressions: triage-suppressions.toml
     fail-on: high        # leave empty for report-only
 ```
 
-The ranked report appears in the job summary. To post it on PRs, add [sticky-pull-request-comment](https://github.com/marocchino/sticky-pull-request-comment) with `path: scan-triage.md`.
+There's no release tag yet, so pin a commit from `main`, as above. The ranked report appears in the job summary. To post it on PRs, add [sticky-pull-request-comment](https://github.com/marocchino/sticky-pull-request-comment) with `path: scan-triage.md`.
 
 ## Security of the tool itself
 
